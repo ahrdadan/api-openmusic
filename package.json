@@ -1,0 +1,30 @@
+{
+  "name": "openmusic-api-v1",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "node ./src/server.js",
+    "start:prod": "NODE_ENV=production node ./src/server.js",
+    "migrate": "node-pg-migrate",
+    "lint": "eslint ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.10",
+    "auto-bind": "^5.0.1",
+    "dotenv": "^16.4.5",
+    "joi": "^17.13.3",
+    "nanoid": "^5.0.7",
+    "node-pg-migrate": "^7.6.1",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.30.0"
+  }
+}
