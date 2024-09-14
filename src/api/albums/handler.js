@@ -1,69 +1,65 @@
 import autoBind from 'auto-bind';
+import SongsService from '../../services/postgres/SongsService.js';
 
 export default class AlbumsHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
+    this.songService = new SongsService();
 
     autoBind(this);
   }
 
   async postAlbumHandler(request, h) {
-    this._validator.validateAlbumsPayload(request.payload);
-    const { name = 'untitled', year } = request.payload;
+    this._validator.validateAlbumPayload(request.payload);
+    const albumId = await this._service.addAlbum(request.payload);
 
-    const albumId = await this._service.postAlbum({ name, year });
-
-    return h.response({
+    const response = h.response({
       status: 'success',
       data: {
         albumId,
       },
-    }).code(201);
-  }
-
-  async getAlbumsHandler(request, h) {
-    const albums = await this._service.getAlbums();
-
-    return h.response({
-      status: 'success',
-      data: {
-        albums,
-      },
-    }).code(200);
+    });
+    response.code(201);
+    return response;
   }
 
   async getAlbumByIdHandler(request, h) {
-    const { albumId } = request.params;
-    const album = await this._service.getAlbumById(albumId);
+    const { id } = request.params;
+    const album = await this._service.getAlbumById(id);
+    const songs = await this.songService.getSongsByAlbumId(id);
 
-    return h.response({
+    // Menggabungkan Album dan Song
+    album.songs = songs;
+    const response = h.response({
       status: 'success',
       data: {
         album,
       },
-    }).code(200);
+    });
+    return response;
   }
 
   async putAlbumByIdHandler(request, h) {
-    this._validator.validateAlbumsPayload(request.payload);
-    const { albumId } = request.params;
+    this._validator.validateAlbumPayload(request.payload);
+    const { id } = request.params;
 
-    await this._service.editAlbumById(albumId, request.payload);
+    await this._service.editAlbumById(id, request.payload);
 
-    return h.response({
+    const response = h.response({
       status: 'success',
       message: 'Album berhasil diperbarui',
-    }).code(200);
+    });
+    return response;
   }
 
   async deleteAlbumByIdHandler(request, h) {
-    const { albumId } = request.params;
-    await this._service.deleteAlbumById(albumId);
-
-    return h.response({
+    const { id } = request.params;
+    await this._service.deleteAlbumById(id);
+    const response = h.response({
       status: 'success',
       message: 'Album berhasil dihapus',
-    }).code(200);
+    });
+    return response;
   }
 }

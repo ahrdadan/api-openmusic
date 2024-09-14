@@ -1,8 +1,8 @@
-import InvariantError from '../../exceptions/InvariantError.js';
+import InvariantError from '../../exceptions/invariantError.js';
 import { AlbumPayloadSchema } from './schema.js';
 
 const AlbumsValidator = {
-  validateAlbumsPayload: (payload) => {
+  validateAlbumPayload: (payload) => {
     const validationResult = AlbumPayloadSchema.validate(payload);
     if (validationResult.error) {
       throw new InvariantError(validationResult.error.message);
