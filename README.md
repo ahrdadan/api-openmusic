@@ -1,11 +1,17 @@
-# Tugas Dicoding
+Jalankan backend kemudian jalankan consumer
 
-V1
-[Kelas](https://www.dicoding.com/academies/271/corridor)
+Backend menggunakan port: 3000
 
-V2
-Tambahan:
+Info system package:
 
-- User
-- Collab
-- Playlist
+- Hapi
+- Postgree
+
+Info system:
+
+- Storage memakai local
+- memakai mailtrap untuk send email
+
+Feature:
+
+- Upload Image s/d 512kb all types images

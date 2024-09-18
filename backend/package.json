@@ -1,0 +1,49 @@
+{
+  "name": "openmusic-api",
+  "version": "3.0.0",
+  "author": "Ahmad Ramadhan <ahrdadan@gmail.com>",
+  "description": "Open Music For Backend with Hapijs and Postgree",
+  "keywords": [
+    "nodejs",
+    "hapi",
+    "Backend",
+    "postgree"
+  ],
+  "engines": {
+    "node": "20.17.0",
+    "npm": "10.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahrdadan/api-openmusic.git"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start:prod": "NODE_ENV=production node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "lint": "eslint ./src",
+    "migrate": "node-pg-migrate",
+    "migrate:c": "node-pg-migrate create"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.10",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/jwt": "^3.2.0",
+    "amqplib": "^0.10.4",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "joi": "^17.13.3",
+    "nanoid": "^3.1.20",
+    "node-pg-migrate": "^7.5.2",
+    "path": "^0.12.7",
+    "pg": "^8.12.0",
+    "redis": "^4.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.30.0",
+    "nodemon": "^3.1.4"
+  }
+}
